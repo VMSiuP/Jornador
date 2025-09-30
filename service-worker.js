@@ -1,4 +1,4 @@
-// Define un nombre y versión para el caché
+// La versión v4 es crucial para forzar la actualización
 const CACHE_NAME = 'jornador-siu-cache-v4';
 
 // Lista de archivos a cachear (el "App Shell")
@@ -38,7 +38,6 @@ self.addEventListener('activate', event => {
 });
 
 // Evento 'fetch': intercepta las peticiones de red.
-// Estrategia: "Cache First". Primero busca en el caché, si no lo encuentra, va a la red.
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
