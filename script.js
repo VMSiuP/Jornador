@@ -33,13 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const totalDiasPPL = (años * 365) + (meses * 30) + días;
     let jornadas = Math.ceil(totalDiasPPL / 7);
-
-    // Aplicar límites (10 a 156 jornadas)
     jornadas = Math.max(10, Math.min(jornadas, 156));
 
     jornadasCalculadas = jornadas;
     inputs.resultado.value = `${jornadas} jornadas`;
-    inputs.resultadoDescuento.value = ''; // Limpiar descuento previo
+    inputs.resultadoDescuento.value = '';
   };
   
   // --- LÓGICA DE DESCUENTO ---
@@ -73,8 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     try {
       await navigator.clipboard.writeText(resultadoInput.value);
-      
-      // Feedback visual no intrusivo
       const originalText = buttonElement.innerText;
       buttonElement.innerText = '¡Copiado!';
       buttonElement.disabled = true;
@@ -86,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } catch (err) {
       console.error('Error al copiar:', err);
-      // Podrías mostrar un error de forma no intrusiva también si quisieras
     }
   };
 
