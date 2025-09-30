@@ -7,21 +7,20 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/png" href="icons/icon-192.png" />
   <link rel="apple-touch-icon" href="icons/icon-512.png" />
+  <meta name="theme-color" content="#34495e" />
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
   <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <div class="theme-toggle">
+  <main>
+    <div class="theme-toggle-container">
       <label class="switch">
         <input type="checkbox" id="darkModeToggle">
         <span class="slider round"></span>
       </label>
     </div>
-  </header>
-
-  <main>
+    
     <h1>Víctor Siu</h1>
     <h2>Jornador</h2>
 
@@ -42,25 +41,25 @@
       <input type="text" id="resultado" placeholder="10 a 156 jornadas" readonly />
 
       <div class="botones">
-        <button class="btn amarillo" onclick="copiarResultado('resultado')">Copiar resultado</button>
-        <button class="btn verde" onclick="compartirWhatsApp('resultado')">Compartir por WhatsApp</button>
-        <button class="btn celeste" onclick="nuevoCalculo()">Nuevo cálculo</button>
+        <button id="copiarResultadoBtn" class="btn amarillo">Copiar resultado</button>
+        <button id="compartirResultadoBtn" class="btn verde">Compartir por WhatsApp</button>
+        <button id="nuevoCalculoBtn" class="btn celeste">Nuevo cálculo</button>
       </div>
     </section>
 
     <hr />
 
     <section class="descuentos">
-      <button class="btn plomo" onclick="descontar('1/6')">Descontar 1/6 por Terminación anticipada</button>
-      <button class="btn plomo" onclick="descontar('1/7')">Descontar 1/7 por Conclusión anticipada</button>
+      <button id="descontarTA" class="btn plomo">Descontar 1/6 por Terminación anticipada</button>
+      <button id="descontarCA" class="btn plomo">Descontar 1/7 por Conclusión anticipada</button>
 
       <label>Resultado con descuento</label>
       <input type="text" id="resultadoDescuento" placeholder="Resultado con descuento" readonly />
 
       <div class="botones">
-        <button class="btn amarillo" onclick="copiarResultado('resultadoDescuento')">Copiar resultado</button>
-        <button class="btn verde" onclick="compartirWhatsApp('resultadoDescuento')">Compartir por WhatsApp</button>
-        <button class="btn celeste" onclick="nuevoCompleto()">Nuevo</button>
+        <button id="copiarDescuentoBtn" class="btn amarillo">Copiar resultado</button>
+        <button id="compartirDescuentoBtn" class="btn verde">Compartir por WhatsApp</button>
+        <button id="nuevoCompletoBtn" class="btn celeste">Nuevo</button>
       </div>
     </section>
   </main>
