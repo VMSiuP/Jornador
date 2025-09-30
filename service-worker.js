@@ -1,53 +1,36 @@
 // Define un nombre y versión para el caché
-const CACHE_NAME = 'jornador-siu-cache-v2';
+const CACHE_NAME = 'jornador-siu-cache-v3'; // Incrementa la versión para forzar la actualización
 
 // Lista de archivos a cachear (el "App Shell")
 const urlsToCache = [
-  './', // Ruta relativa a la raíz del proyecto (muy importante)
+  './',
   './index.html',
   './styles.css',
   './script.js',
-  './manifest.json',
+  './manifest.webmanifest', // Actualizado al nuevo nombre
   './icons/icon-192.png',
   './icons/icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Poppins&display=swap' // Ruta absoluta externa (correcto)
+  'https://fonts.googleapis.com/css2?family=Poppins&display=swap'
 ];
 
-// Evento 'install': se dispara cuando el Service Worker se instala.
+// El resto del archivo es idéntico...
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Cache abierto y archivos cacheados');
-        return cache.addAll(urlsToCache);
-      })
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache)));
 });
 
-// Evento 'activate': se dispara cuando el Service Worker se activa.
-// Aquí es donde limpiamos los cachés antiguos.
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Borrando caché antiguo:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
+        cacheNames.filter(name => name !== CACHE_NAME).map(name => caches.delete(name))
       );
     })
   );
   return self.clients.claim();
 });
 
-// Evento 'fetch': intercepta las peticiones de red.
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        return response || fetch(event.request);
-      })
+    caches.match(event.request).then(response => response || fetch(event.request))
   );
 });
