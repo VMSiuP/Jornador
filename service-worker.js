@@ -3,14 +3,14 @@ const CACHE_NAME = 'jornador-siu-cache-v2';
 
 // Lista de archivos a cachear (el "App Shell")
 const urlsToCache = [
-  '/',
-  'index.html',
-  'styles.css',
-  'script.js',
-  'manifest.json',
-  'icons/icon-192.png',
-  'icons/icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Poppins&display=swap'
+  './', // Ruta relativa a la raíz del proyecto (muy importante)
+  './index.html',
+  './styles.css',
+  './script.js',
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  'https://fonts.googleapis.com/css2?family=Poppins&display=swap' // Ruta absoluta externa (correcto)
 ];
 
 // Evento 'install': se dispara cuando el Service Worker se instala.
@@ -43,7 +43,6 @@ self.addEventListener('activate', event => {
 });
 
 // Evento 'fetch': intercepta las peticiones de red.
-// Estrategia: "Cache First". Primero busca en el caché, si no lo encuentra, va a la red.
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
