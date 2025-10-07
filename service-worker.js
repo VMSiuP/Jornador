@@ -1,5 +1,5 @@
-// La versión v4 es crucial para forzar la actualización
-const CACHE_NAME = 'jornador-siu-cache-v4';
+// CAMBIO: Versión del caché incrementada a v5 para servir el nuevo index.html
+const CACHE_NAME = 'jornador-siu-cache-v5';
 
 // Lista de archivos a cachear (el "App Shell")
 const urlsToCache = [
@@ -18,7 +18,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Cache abierto y archivos cacheados');
+        console.log('Cache abierto y archivos cacheados para v5');
         return cache.addAll(urlsToCache);
       })
   );
@@ -38,6 +38,7 @@ self.addEventListener('activate', event => {
 });
 
 // Evento 'fetch': intercepta las peticiones de red.
+// Estrategia: "Cache First". Primero busca en el caché, si no lo encuentra, va a la red.
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
