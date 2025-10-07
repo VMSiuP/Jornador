@@ -159,3 +159,22 @@ input:checked + .slider:before { transform: translateX(26px); }
     font-size: 0.8em;
     opacity: 0.6;
 }
+
+/* --- Estilo para el enlace de contacto --- */
+.contacto {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+}
+
+.contacto a {
+  color: var(--text-color);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.contacto a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
